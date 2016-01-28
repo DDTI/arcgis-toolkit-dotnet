@@ -18,8 +18,8 @@
 		<Setter Property="IsTabStop" Value="False" />
 
 		<!-- LegendItemTemplate = template for low level legend item : image + label-->
-		<Setter Property="LegendItemTemplate">
-			<Setter.Value>
+        <Setter Property="LegendItemTemplate">
+            <Setter.Value>
 				<DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="1">
                         <Grid MinWidth="20" MinHeight="10">
@@ -31,8 +31,8 @@
 				</DataTemplate>
 			</Setter.Value>
 		</Setter>
-
-		<!-- LayerLegendTemplate = template for a layer legend -->
+        
+        <!-- LayerLegendTemplate = template for a layer legend -->
 		<Setter Property="LayerTemplate">
 			<Setter.Value>
 				<DataTemplate>
@@ -460,5 +460,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

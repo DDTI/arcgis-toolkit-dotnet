@@ -24,7 +24,7 @@ namespace ArcGISRuntime.Toolkit.Samples.Desktop.Legend
 		{
 			// Zoom to water network
 			var layer = e.Layer as ArcGISDynamicMapServiceLayer;
-			if (layer != null)
+			if (layer != null && e.LoadError == null)
 			{
 				var extent = layer.ServiceInfo.InitialExtent ?? layer.ServiceInfo.InitialExtent;
 				if (extent != null)
