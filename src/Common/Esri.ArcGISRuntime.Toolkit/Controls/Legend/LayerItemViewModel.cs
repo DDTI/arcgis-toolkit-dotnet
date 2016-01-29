@@ -55,13 +55,9 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 			: this(layer)
 		{
 			Debug.Assert(layerLegendInfo != null);
-
-            //var fl = layer as FeatureLayer;
-            //if (fl != null)
-            //{
-            //    GeometryType = fl.FeatureTable.GeometryType;
-            //}
-
+            
+            var gType = Geometry.GeometryType.Unknown;
+            
             SubLayerID = layerLegendInfo.SubLayerID;
 			Label = layerLegendInfo.LayerName;
 			ParentLabel = layer.DisplayName;
@@ -81,7 +77,7 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 
 			if (layerLegendInfo.LegendItemInfos != null)
 			{
-				LegendItems = layerLegendInfo.LegendItemInfos.Select(info => new LegendItemViewModel(info, Geometry.GeometryType.Unknown)).ToObservableCollection();
+				LegendItems = layerLegendInfo.LegendItemInfos.Select(info => new LegendItemViewModel(info, gType)).ToObservableCollection();
 			}
 		}
 

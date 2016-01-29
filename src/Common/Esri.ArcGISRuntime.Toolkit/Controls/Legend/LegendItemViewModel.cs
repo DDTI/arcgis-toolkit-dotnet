@@ -38,7 +38,6 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 		{
 		}
 
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="LegendItemViewModel"/> class from a <see cref="LegendItemInfo"/>.
 		/// </summary>
@@ -48,15 +47,14 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 			: this()
 		{
 			Label = legendItemInfo.Label;
-			Symbol = legendItemInfo.Symbol;
+			Symbol = legendItemInfo.Symbol; 
 			GeometryType = geometryType;
-            GetSwatch();
+            GetImageSource();
 		}
 
-        private ImageSource swatch;
-        private void GetSwatch()
+        private async void GetImageSource()
         {
-          //  swatch = Symbol.CreateSwatchAsync(20, 20, 96, Colors.Red, GeometryType);
+            ImageSource = await Symbol.CreateSwatchAsync();
         }
 		#endregion
 
@@ -99,15 +97,38 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 				if (_symbol != value)
 				{
 					_symbol = value;
-					OnPropertyChanged("Symbol");
+                    OnPropertyChanged("Symbol");
 				}
 			}
 		}
-		#endregion
+        #endregion
 
-		#region Description
+        #region ImageSource
+        private ImageSource _imgSource;
 
-		private string _description;
+        /// <summary>
+        /// Gets the symbol that represents this instance 
+        /// </summary>
+        public ImageSource ImageSource
+        {
+            get
+            {
+                return _imgSource;
+            }
+            internal set
+            {
+                if (_imgSource != value)
+                {
+                    _imgSource = value;
+                    OnPropertyChanged("ImageSource");
+                }
+            }
+        }
+        #endregion
+
+        #region Description
+
+        private string _description;
 
 		/// <summary>
 		/// The description of the legend item.
