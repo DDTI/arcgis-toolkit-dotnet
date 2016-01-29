@@ -50,8 +50,14 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 			Label = legendItemInfo.Label;
 			Symbol = legendItemInfo.Symbol;
 			GeometryType = geometryType;
+            GetSwatch();
 		}
 
+        private ImageSource swatch;
+        private void GetSwatch()
+        {
+          //  swatch = Symbol.CreateSwatchAsync(20, 20, 96, Colors.Red, GeometryType);
+        }
 		#endregion
 
 		#region Label
@@ -85,7 +91,9 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 		/// </summary>
 		public Symbol Symbol
 		{
-			get { return _symbol; }
+			get {
+                return _symbol;
+            }
 			internal set
 			{
 				if (_symbol != value)

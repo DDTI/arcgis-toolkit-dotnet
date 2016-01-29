@@ -31,8 +31,17 @@
 				<DropShadowEffect />
 			</Border.Effect>
 			<ScrollViewer VerticalScrollBarVisibility="Auto">
-				<toolkit:Legend 
-						Layers="{Binding ElementName=MyMapView, Path=Map.Layers}"/>
+                <toolkit:Legend  
+						Layers="{Binding ElementName=MyMapView, Path=Map.Layers}">
+                    <!--<toolkit:Legend.LegendItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Symbol}"/>
+                                <TextBlock Text="{Binding Label}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </toolkit:Legend.LegendItemTemplate>-->
+                </toolkit:Legend>
 			</ScrollViewer>
 		</Border>
 	</Grid>

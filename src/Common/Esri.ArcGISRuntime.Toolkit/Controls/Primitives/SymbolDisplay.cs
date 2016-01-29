@@ -72,7 +72,10 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
                 new FrameworkPropertyMetadata(typeof (SymbolDisplay)));
         }
 #endif
-
+        public SymbolDisplay(Image image)
+        {
+            _image = image;
+        }
         #endregion Constructor
 
         #region OnApplyTemplate

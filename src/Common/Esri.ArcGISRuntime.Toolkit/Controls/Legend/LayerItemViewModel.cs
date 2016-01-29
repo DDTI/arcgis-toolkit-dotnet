@@ -56,12 +56,18 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 		{
 			Debug.Assert(layerLegendInfo != null);
 
-			SubLayerID = layerLegendInfo.SubLayerID;
+            //var fl = layer as FeatureLayer;
+            //if (fl != null)
+            //{
+            //    GeometryType = fl.FeatureTable.GeometryType;
+            //}
+
+            SubLayerID = layerLegendInfo.SubLayerID;
 			Label = layerLegendInfo.LayerName;
 			ParentLabel = layer.DisplayName;
 			LayerType = layerLegendInfo.LayerType;
 			IsHidden = layerLegendInfo.IsHidden;
-
+            
 			Description = string.IsNullOrEmpty(layerLegendInfo.LayerDescription) ? defaultLayerDescription : layerLegendInfo.LayerDescription;
 
 			// Convert scale to resolution
