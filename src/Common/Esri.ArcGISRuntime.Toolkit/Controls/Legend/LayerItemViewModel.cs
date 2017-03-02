@@ -77,7 +77,16 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 			{
 				LegendItems = layerLegendInfo.LegendItemInfos.Select(info => new LegendItemViewModel(info, Geometry.GeometryType.Unknown)).ToObservableCollection();
 			}
-		}
+
+            if (Layer is ArcGISDynamicMapServiceLayer)
+            {
+                ArcGISDynamicMapServiceLayer dynamicLayer = (ArcGISDynamicMapServiceLayer)Layer;
+                if (dynamicLayer.VisibleLayers.Contains(SubLayerID))
+                    _isEnabled = true;
+                else
+                    _isEnabled = false;
+            }
+        }
 
 		#endregion
 
@@ -183,8 +192,19 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 				if (value != _isEnabled)
 				{
 					_isEnabled = value;
-					if (Layer != null)
-						Layer.IsVisible = value;
+                    if (Layer is ArcGISDynamicMapServiceLayer)
+                    {
+                        ArcGISDynamicMapServiceLayer dynamicLayer = (ArcGISDynamicMapServiceLayer)Layer;
+                        if (!_isEnabled && dynamicLayer.VisibleLayers != null && dynamicLayer.VisibleLayers.Contains(SubLayerID))
+                            dynamicLayer.VisibleLayers.Remove(SubLayerID);
+                        else if (_isEnabled && dynamicLayer.VisibleLayers != null && !dynamicLayer.VisibleLayers.Contains(SubLayerID))
+                            dynamicLayer.VisibleLayers.Add(SubLayerID);
+                    }
+                    else
+                    {
+                        if (Layer != null)
+                            Layer.IsVisible = value;
+                    }
 					OnPropertyChanged("IsEnabled");
 				}
 			}
@@ -205,11 +225,12 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 			{
 				return _isVisible;
 			}
-			internal set
+			set
 			{
 				if (value != _isVisible)
 				{
 					_isVisible = value;
+                    
 					OnPropertyChanged("IsVisible");
 				}
 			}
@@ -516,7 +537,7 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 							(!hasLayerChildren && (!hasNoChildren || isBusy))  || // Leaves are returned if they are not empty
 							LayerItemsOptions.ReturnGroupLayerItems) && !layerItem.IsTransparent)
 						{
-							yield return layerItem;
+                            yield return layerItem;
 						}
 						else
 						{
@@ -774,17 +795,20 @@ namespace Esri.ArcGISRuntime.Toolkit.Controls.Primitives
 		internal void UpdateLayerVisibilities(bool isParentVisible, bool isParentInScaleRange, bool isParentInTimeExtent)
 		{
 			bool isEnabled;
-			if (Layer != null)
-				isEnabled = Layer.IsVisible;
-			else
-				isEnabled = true;
+            if (Layer.GetType() != typeof(ArcGISDynamicMapServiceLayer))
+            {
+                if (Layer != null)
+                    isEnabled = Layer.IsVisible;
+                else
+                    isEnabled = true;
 
-			if (isEnabled != IsEnabled)
-			{
-				_isEnabled = isEnabled; // Note : don't set directly the property to avoid an useless call to SetLayerVisibility
-				OnPropertyChanged("IsEnabled");
-			}
-
+                if (isEnabled != IsEnabled)
+                {
+                    _isEnabled = isEnabled; // Note : don't set directly the property to avoid an useless call to SetLayerVisibility
+                    OnPropertyChanged("IsEnabled");
+                }
+            }
+            
 			double mapScale = (LegendTree != null) ? LegendTree.Scale : double.NaN;
 			
 			if (isParentInScaleRange)
