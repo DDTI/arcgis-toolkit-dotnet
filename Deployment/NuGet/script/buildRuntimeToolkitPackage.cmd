@@ -10,8 +10,8 @@ SET TYPE=
 SET BUILDNUM=1026
 
 REM source locations
-REM SET WINSTORETOOLKITFOLDER=..\..\..\output\WinStore\VSIX
-REM SET WINPHONETOOLKITFOLDER=..\..\..\output\WinPhone\VSIX
+SET WINSTORETOOLKITFOLDER=..\..\..\output\WinStore\VSIX
+SET WINPHONETOOLKITFOLDER=..\..\..\output\WinPhone\VSIX
 SET WINDESKTOPTOOLKITFOLDER=..\..\..\output\WinDesktop
 
 REM intermediate build locations
@@ -34,8 +34,8 @@ ECHO
 ECHO Unzipping extension SDK VSIX for store and phone...
 ECHO
 REM Unpack Extension SDKs
-REM 7za.exe x -o%EXTENSIONSDKFOLDER%\%VERSION%\win81\ %WINSTORETOOLKITFOLDER%\Esri.ArcGISRuntime.Toolkit.WS.vsix 
-REM 7za.exe x -o%EXTENSIONSDKFOLDER%\%VERSION%\wpa81\ %WINPHONETOOLKITFOLDER%\Esri.ArcGISRuntime.Toolkit.WP.vsix
+7za.exe x -o%EXTENSIONSDKFOLDER%\%VERSION%\win81\ %WINSTORETOOLKITFOLDER%\Esri.ArcGISRuntime.Toolkit.WS.vsix 
+7za.exe x -o%EXTENSIONSDKFOLDER%\%VERSION%\wpa81\ %WINPHONETOOLKITFOLDER%\Esri.ArcGISRuntime.Toolkit.WP.vsix
 
 ECHO
 ECHO Copying files from extension SDK to package staging area for store and phone...
@@ -46,57 +46,57 @@ REM Copy Windows Store files
 REM ==========================
 
 REM copy neutral files to all three platforms
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\win81\ARM\ /S /Y
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\win81\x64\ /S /Y
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\win81\x86\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\win81\ARM\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\win81\x64\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\win81\x86\ /S /Y
 
 REM copy Generic.xaml to all platforms
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\DesignTime\CommonConfiguration\neutral\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\win81\ARM\Esri.ArcGISRuntime.Toolkit.WindowsStore\Themes\ /S /Y
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\DesignTime\CommonConfiguration\neutral\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\win81\x64\Esri.ArcGISRuntime.Toolkit.WindowsStore\Themes\ /S /Y
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\DesignTime\CommonConfiguration\neutral\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\win81\x86\Esri.ArcGISRuntime.Toolkit.WindowsStore\Themes\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\DesignTime\CommonConfiguration\neutral\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\win81\ARM\Esri.ArcGISRuntime.Toolkit.WindowsStore\Themes\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\DesignTime\CommonConfiguration\neutral\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\win81\x64\Esri.ArcGISRuntime.Toolkit.WindowsStore\Themes\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\DesignTime\CommonConfiguration\neutral\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\win81\x86\Esri.ArcGISRuntime.Toolkit.WindowsStore\Themes\ /S /Y
 
 REM copy ARM files to ARM package staging
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\References\CommonConfiguration\ARM %PACKAGEFOLDER%\sdk\win81\ARM\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\References\CommonConfiguration\ARM %PACKAGEFOLDER%\sdk\win81\ARM\ /S /Y
 
 REM copy x64 files to x64 package staging
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\References\CommonConfiguration\x64 %PACKAGEFOLDER%\sdk\win81\x64\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\References\CommonConfiguration\x64 %PACKAGEFOLDER%\sdk\win81\x64\ /S /Y
 
 REM copy x86 files to x86 package staging
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\References\CommonConfiguration\x86 %PACKAGEFOLDER%\sdk\win81\x86\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\win81\References\CommonConfiguration\x86 %PACKAGEFOLDER%\sdk\win81\x86\ /S /Y
 
 REM ==========================
 REM Copy Windows Phone files
 REM ==========================
 
 REM copy neutral files to all platforms
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\wpa81\ARM\ /S /Y
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\wpa81\x86\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\wpa81\ARM\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\Redist\CommonConfiguration\neutral %PACKAGEFOLDER%\sdk\wpa81\x86\ /S /Y
 
 REM copy design assembly
 REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\DesignTime\CommonConfiguration\x86 %PACKAGEFOLDER%\sdk\wpa81\x86\ /S /Y
 
 REM copy Generic.xaml to all platforms
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\DesignTime\CommonConfiguration\neutral\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\wpa81\ARM\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Themes\ /S /Y
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\DesignTime\CommonConfiguration\neutral\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\wpa81\x86\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Themes\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\DesignTime\CommonConfiguration\neutral\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\wpa81\ARM\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Themes\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\DesignTime\CommonConfiguration\neutral\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Themes\Generic.xaml %PACKAGEFOLDER%\sdk\wpa81\x86\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Themes\ /S /Y
 
 REM copy ARM files to ARM package staging
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\References\CommonConfiguration\ARM %PACKAGEFOLDER%\sdk\wpa81\ARM\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\References\CommonConfiguration\ARM %PACKAGEFOLDER%\sdk\wpa81\ARM\ /S /Y
 
 REM copy x86 files to x86 package staging
-REM xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\References\CommonConfiguration\x86 %PACKAGEFOLDER%\sdk\wpa81\x86\ /S /Y
+xcopy %EXTENSIONSDKFOLDER%\%VERSION%\wpa81\References\CommonConfiguration\x86 %PACKAGEFOLDER%\sdk\wpa81\x86\ /S /Y
 
 REM ==================================================
 REM Copy xr.xml files that aren't in extension SDK
 REM ==================================================
 
 REM copy xr.xml file to all Windows Store platforms
-REM xcopy %WINSTORETOOLKITFOLDER%\..\ARM\Release\Esri.ArcGISRuntime.Toolkit.WindowsStore\Esri.ArcGISRuntime.Toolkit.WindowsStore.xr.xml %PACKAGEFOLDER%\sdk\win81\ARM\Esri.ArcGISRuntime.Toolkit.WindowsStore\ /S /Y
-REM xcopy %WINSTORETOOLKITFOLDER%\..\x86\Release\Esri.ArcGISRuntime.Toolkit.WindowsStore\Esri.ArcGISRuntime.Toolkit.WindowsStore.xr.xml %PACKAGEFOLDER%\sdk\win81\x86\Esri.ArcGISRuntime.Toolkit.WindowsStore\ /S /Y
-REM xcopy %WINSTORETOOLKITFOLDER%\..\x64\Release\Esri.ArcGISRuntime.Toolkit.WindowsStore\Esri.ArcGISRuntime.Toolkit.WindowsStore.xr.xml %PACKAGEFOLDER%\sdk\win81\x64\Esri.ArcGISRuntime.Toolkit.WindowsStore\ /S /Y
+xcopy %WINSTORETOOLKITFOLDER%\..\ARM\Release\Esri.ArcGISRuntime.Toolkit.WindowsStore\Esri.ArcGISRuntime.Toolkit.WindowsStore.xr.xml %PACKAGEFOLDER%\sdk\win81\ARM\Esri.ArcGISRuntime.Toolkit.WindowsStore\ /S /Y
+xcopy %WINSTORETOOLKITFOLDER%\..\x86\Release\Esri.ArcGISRuntime.Toolkit.WindowsStore\Esri.ArcGISRuntime.Toolkit.WindowsStore.xr.xml %PACKAGEFOLDER%\sdk\win81\x86\Esri.ArcGISRuntime.Toolkit.WindowsStore\ /S /Y
+xcopy %WINSTORETOOLKITFOLDER%\..\x64\Release\Esri.ArcGISRuntime.Toolkit.WindowsStore\Esri.ArcGISRuntime.Toolkit.WindowsStore.xr.xml %PACKAGEFOLDER%\sdk\win81\x64\Esri.ArcGISRuntime.Toolkit.WindowsStore\ /S /Y
 
 REM copy xr.xml file to all Windows Phone platforms
-REM xcopy %WINPHONETOOLKITFOLDER%\..\ARM\Release\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Esri.ArcGISRuntime.Toolkit.WindowsPhone.xr.xml %PACKAGEFOLDER%\sdk\wpa81\ARM\Esri.ArcGISRuntime.Toolkit.WindowsPhone\ /S /Y
-REM xcopy %WINPHONETOOLKITFOLDER%\..\x86\Release\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Esri.ArcGISRuntime.Toolkit.WindowsPhone.xr.xml %PACKAGEFOLDER%\sdk\wpa81\x86\Esri.ArcGISRuntime.Toolkit.WindowsPhone\ /S /Y
+xcopy %WINPHONETOOLKITFOLDER%\..\ARM\Release\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Esri.ArcGISRuntime.Toolkit.WindowsPhone.xr.xml %PACKAGEFOLDER%\sdk\wpa81\ARM\Esri.ArcGISRuntime.Toolkit.WindowsPhone\ /S /Y
+xcopy %WINPHONETOOLKITFOLDER%\..\x86\Release\Esri.ArcGISRuntime.Toolkit.WindowsPhone\Esri.ArcGISRuntime.Toolkit.WindowsPhone.xr.xml %PACKAGEFOLDER%\sdk\wpa81\x86\Esri.ArcGISRuntime.Toolkit.WindowsPhone\ /S /Y
 
 REM =================
 REM DESKTOP STAGING
@@ -106,8 +106,8 @@ xcopy %WINDESKTOPTOOLKITFOLDER%\Release\Esri.ArcGISRuntime.Toolkit.dll %PACKAGEF
 xcopy %WINDESKTOPTOOLKITFOLDER%\Release\Esri.ArcGISRuntime.Toolkit.xml %PACKAGEFOLDER%\sdk\net45\ /S /Y
 
 REM rename .targets files to match package ID
-REM rename %PACKAGEFOLDER%\build\win81\Esri.ArcGISRuntime.Toolkit.targets %ID%.targets
-REM rename %PACKAGEFOLDER%\build\wpa81\Esri.ArcGISRuntime.Toolkit.targets %ID%.targets
+rename %PACKAGEFOLDER%\build\win81\Esri.ArcGISRuntime.Toolkit.targets %ID%.targets
+rename %PACKAGEFOLDER%\build\wpa81\Esri.ArcGISRuntime.Toolkit.targets %ID%.targets
 rename %PACKAGEFOLDER%\build\net45\Esri.ArcGISRuntime.Toolkit.targets %ID%.targets
 
 REM ===================
